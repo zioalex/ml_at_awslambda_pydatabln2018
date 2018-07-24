@@ -12,4 +12,6 @@ fi
 docker pull bweigel/ml_at_awslambda_pydatabln2018_autobuild:latest
 docker run --rm -ti -v $(pwd)/from_scratch:/from_scratch -w /from_scratch \
     -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
-    -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} bweigel/ml_at_awslambda_pydatabln2018_autobuild:latest /bin/bash
+    -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+    -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN} \
+    bweigel/ml_at_awslambda_pydatabln2018_autobuild:latest /bin/bash

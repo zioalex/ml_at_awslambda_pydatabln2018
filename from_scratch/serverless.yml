@@ -1,0 +1,32 @@
+service: pydata-2018-serverless
+
+plugins:
+  - serverless-python-requirements
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: eu-west-1
+
+  deploymentBucket:
+    # create the bucket with http access?!?
+    name: ml-at-awslambda-pydatabln2018
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+      Resource:
+        - "arn:aws:s3:::ml-at-awslambda-pydatabln2018/*"
+
+functions:
+  categorize_lambda:
+    name: categorize-lambda
+    description: Lambda prediction
+    handler: main.lambda_handler
+    events:
+      - http: POST /spamorham
+
+#custom:
+#  pythonRequirements:
+#    slim: true # it remove all test code and strip unnecessary code from dependency.
